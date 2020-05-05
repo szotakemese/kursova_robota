@@ -1,0 +1,46 @@
+{{#if products}}
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-md-offset-3 col-sm-offset-3">
+            <ul class="list-group list-group-flush">
+                {{#each products}}
+                    <li class="list-group-item">
+                        <span class="badge badge-dark"> {{this.quantity}} </span>
+                        <strong> {{this.item.title}} </strong>
+                        <span class="badge badge-success">${{this.price}}</span>
+                        <div class="btn-group" style="position: absolute; right: 1%">
+                            <button class="btn btn-light btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="https://image.flaticon.com/icons/svg/748/748023.svg" height="19px"></button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="/reduce/{{this.item._id}}">Remove 1 </a>
+                                <a class="dropdown-item" href="/remove/{{this.item._id}}">Remove all</a>
+                            </div>                          
+                        </div>
+                    </li>
+                {{/each}}
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
+            <strong class="total" style="font-size: 25px;">Total: $ {{totalPrice}}</strong>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-sm-3 col-md-3 col-md-offset-3 col-sm-offset-3" >
+            <a href="/checkout" type="button" class="btn btn-dark btn-block">Checkout</a>
+        </div>
+    </div>
+    {{else}}
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-md-offset-3 col-sm-offset-3">                
+                <div class="alert alert-dark" role="alert">
+                    <h1 class="alert-heading">No items in the cart</h1>
+                    <hr>
+                    <p class="mb-0">Go back to the <a href="/" class="alert-link"> Home Page </a>and choose new items.</p>
+</div>
+            </div>
+        </div>
+{{/if}}
+
+
+

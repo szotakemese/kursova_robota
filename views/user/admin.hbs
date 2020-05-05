@@ -1,0 +1,18 @@
+<h1>Admin page</h1>
+<h4>List of products</h4>
+<div class="container">
+    <ul class="list-group list-group-flush">
+        {{#each products}}
+            {{#each this}}
+                <li class="list-group-item list-group-item-action">
+                    <img src="{{ this.image }}" alt="..." width="40px">
+                    <strong> {{this.title}} </strong>
+                    <span class="badge badge-dark" style="height: 25px; font-size: 16px">${{this.price}}</span>
+                    <div class="button" style="position: absolute; right: 5%; top: 20%" >
+                        <a href="/delete/{{this._id}}" class="btn btn-outline-dark" role="button"><b>Delete</b></a>
+                    </div>
+                </li>
+            {{/each}}
+        {{/each}}
+    </ul>
+</div>
