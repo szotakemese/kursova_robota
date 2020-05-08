@@ -21,11 +21,13 @@
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           {{#if login}}
             <div class="dropdown-item">
-              <a class="nav-link active" href="/user/profile"><img src="https://image.flaticon.com/icons/svg/748/748128.svg" height="20px"> User Account <span class="sr-only">(current)</span></a>
-            </div>
-            <div class="dropdown-item">
               <a class="nav-link active" href="/user/logout"><img src="https://image.flaticon.com/icons/svg/1286/1286853.svg" height="20px"> Log out <span class="sr-only">(current)</span></a>
             </div>
+            {{#if isAdmin}}
+              <div class="dropdown-item">
+                <a class="nav-link active" href="../admin"><img src="https://image.flaticon.com/icons/png/512/1212/1212173.png" height="20px"> Admin <span class="sr-only">(current)</span></a>
+              </div>
+            {{/if}}
           {{else}}
             <div class="dropdown-item">
               <a class="nav-link active" href="/user/signin"><img src="https://image.flaticon.com/icons/svg/1000/1000997.svg" height="20px"> Sign In <span class="sr-only">(current)</span></a>

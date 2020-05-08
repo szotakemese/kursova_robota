@@ -53,6 +53,24 @@ router.get('/remove/:id', function(req, res, next){
   res.redirect('/shopping-cart');
 });
 
+//Remove all products
+router.get('/removeall', function(req, res, next){
+  var cart = new Cart(req.session.cart ? req.session.cart : {});
+
+  cart.removeall();
+  req.session.cart = cart;
+  res.redirect('/shopping-cart');
+});
+
+//Successful payment
+router.get('/successpay', function(req, res, next){
+  var cart = new Cart(req.session.cart ? req.session.cart : {});
+
+  cart.removeall();
+  req.session.cart = cart;
+  res.redirect('/');
+});
+
 //GET Shopping cart page
 router.get('/shopping-cart', function(req, res, next){
   if(!req.session.cart){

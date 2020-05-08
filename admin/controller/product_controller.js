@@ -39,8 +39,7 @@ const PoductController = {
         console.log(req.body);
         let newProduct = req.body;
 
-        if (isValid(newProduct)) {
-            const product = new Product(newProduct);
+        const product = new Product(newProduct);
             product.save(function (err) {
                 if (err) {
                     console.log(err)
@@ -51,9 +50,7 @@ const PoductController = {
                 }
                 
             });
-        } else {
-            res.sendStatus(400);
-        }
+        
     },
 
     //delete by id
@@ -75,9 +72,6 @@ const PoductController = {
     }
 }
 
-const isValid = (product) => {
-    return product && product.image && product.title && product.description && product.price;
-}
 
 /*
 

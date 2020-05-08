@@ -8,6 +8,8 @@ var mongoose = require('mongoose');
 var session = require('express-session');
 var passport = require('passport');
 var flash = require('connect-flash');
+const formData = require("express-form-data");
+const os = require("os");
 var MongoStore = require('connect-mongo')(session);
 
 
@@ -17,6 +19,7 @@ const api = require("./admin");
 var indexRouter = require('./routes/index');
 var userRouter = require('./routes/user');
 var adminRouter = require('./routes/admin');
+
 
 var app = express();
 
@@ -34,6 +37,18 @@ mongoose.connect(`${url}/${dbName}`, { useNewUrlParser: true, useUnifiedTopology
 app.engine('.hbs', expressHbs({defaultLayout: 'layout', extname: '.hbs'}))
 app.set('view engine', '.hbs');
 
+
+// FORM DATA/*
+const options = {
+  uploadDir: os.tmpdir(),
+  autoClean: true
+};
+ 
+app.use(formData.parse(options));
+app.use(formData.format());
+app.use(formData.stream());
+app.use(formData.union());
+//----
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -52,6 +67,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(function(req, res, next){
   res.locals.login = req.isAuthenticated();
+  res.locals.isAdmin = true; //
   res.locals.session = req.session; 
   next();
 });
@@ -83,3 +99,4 @@ app.listen(3000);
 
 module.exports = app;
 
+console.log("Server Started at http://localhost:3000")

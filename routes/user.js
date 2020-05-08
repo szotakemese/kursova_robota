@@ -8,24 +8,6 @@ var Product = require('../models/product');
 var csrfProtection = csrf();
 router.use(csrfProtection);
   
-//GET Profile page
-router.get('/profile', isLoggedIn, function(req, res, next){
-    res.render('user/profile')
-});
-
-/*
-//GET Admin page
-router.get('/admin', isLoggedIn, function(req, res, next) {
-    Product.find(function(err, docs){
-      var productChunks = [];
-      var chunkSize = 4;
-      for(var i = 0; i<docs.length; i+= chunkSize){
-        productChunks.push(docs.slice(i, i+chunkSize));
-      }
-      res.render('user/admin', { title: 'Admin Page', products: productChunks });
-    });
-  });
-*/
 
 //Logging out and get Home page
 router.get('/logout', isLoggedIn, function(req, res, next){
@@ -45,7 +27,7 @@ router.get('/signup', function(req, res, next){
   
   
 router.post('/signup', passport.authenticate('local.signup', {
-    successRedirect: '/user/profile',
+    successRedirect: '/',
     failureRedirect: '/user/signup',
     failureFlash: true
 }));
@@ -58,7 +40,7 @@ router.get('/signin', function(req, res, next){
   
 router.post('/signin', passport.authenticate('local.signin', {
     successRedirect: '/user/admin',
-    successRedirect: '/user/profile',
+    successRedirect: '/',
     failureRedirect: '/user/signin',
     failureFlash: true
 }));
